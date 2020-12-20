@@ -1,0 +1,30 @@
+version: "3"
+services:
+  backend:
+    container_name: todo_server
+    build: ./server
+    image: hozane/express_server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    environment:
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+      POSTGRES_HOST: "${POSTGRES_HOST}"
+      POSTGRES_DATABASE: "${POSTGRES_DATABASE}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      ACCESS_TOKEN_SECRET: "${ACCESS_TOKEN_SECRET}"
+      REFRESH_TOKEN_SECRET: "${REFRESH_TOKEN_SECRET}"
+  db:
+    container_name: todo_db
+    image: postgres:11-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "${POSTGRES_DATABASE}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql

@@ -1,0 +1,22 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon -L server.js",
+    "_client": "npm start --prefix client",
+    "_dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "joi": "^17.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
